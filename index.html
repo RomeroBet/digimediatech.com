@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DirectoMedia | Ecosistema Audiovisual, Streaming & Inteligencia Artificial</title>
+    <style>
+        :root {
+            --bg-color: #080b11;
+            --card-bg: #111726;
+            --card-hover: #182238;
+            --accent-cyan: #38bdf8;
+            --accent-blue: #0284c7;
+            --text-main: #ffffff;
+            --text-muted: #94a3b8;
+            --border: #1e293b;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+        body { background: var(--bg-color); color: var(--text-main); line-height: 1.6; }
+
+        /* Header con solución total a desbordamientos móviles */
+        header { 
+            background: rgba(8, 11, 17, 0.95); 
+            border-bottom: 1px solid var(--border); 
+            position: sticky; 
+            top: 0; 
+            z-index: 100; 
+            backdrop-filter: blur(12px); 
+        }
+        .nav-container { 
+            max-width: 1200px; 
+            margin: 0 auto; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            padding: 0.8rem 1.5rem; 
+        }
+
+        .brand-logo { 
+            font-size: 1.5rem; 
+            font-weight: 800; 
+            color: #fff; 
+            text-decoration: none; 
+            display: flex; 
+            align-items: center; 
+            gap: 8px; 
+        }
+        .brand-logo span { color: var(--accent-cyan); }
+
+        .nav-links { display: flex; gap: 1.5rem; list-style: none; align-items: center; }
+        .nav-links a { color: #fff; text-decoration: none; font-weight: 600; font-size: 0.95rem; transition: color 0.2s; }
+        .nav-links a:hover { color: var(--accent-cyan); }
+
+        .menu-btn { display: none; background: none; border: none; color: #fff; font-size: 1.8rem; cursor: pointer; }
+
+        /* Adaptabilidad móvil estricta */
+        @media (max-width: 820px) {
+            .menu-btn { display: block; }
+            .nav-links { 
+                display: none; 
+                flex-direction: column; 
+                position: absolute; 
+                top: 100%; 
+                left: 0; 
+                right: 0; 
+                background: var(--bg-color); 
+                border-bottom: 1px solid var(--border); 
+                padding: 1.5rem; 
+                gap: 1.2rem; 
+            }
+            .nav-links.active { display: flex; }
+        }
+
+        /* Hero */
+        .hero { max-width: 950px; margin: 0 auto; text-align: center; padding: 4.5rem 1.5rem 3rem 1.5rem; }
+        .hero-badge { 
+            display: inline-block; 
+            background: rgba(56, 189, 248, 0.1); 
+            border: 1px solid var(--accent-blue); 
+            color: var(--accent-cyan); 
+            padding: 0.4rem 1rem; 
+            border-radius: 20px; 
+            font-size: 0.85rem; 
+            font-weight: 700; 
+            margin-bottom: 1.5rem; 
+        }
+        .hero h1 { font-size: clamp(2.2rem, 5vw, 3.8rem); font-weight: 800; letter-spacing: -0.02em; margin-bottom: 1.2rem; }
+        .hero h1 span { color: var(--accent-cyan); }
+        .hero p { font-size: 1.2rem; color: var(--text-muted); max-width: 780px; margin: 0 auto 2.5rem auto; }
+
+        /* Módulos de Negocio / Unidades */
+        .hub-section { max-width: 1200px; margin: 0 auto; padding: 2rem 1.5rem 5rem 1.5rem; }
+        .hub-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
+
+        .unit-card { 
+            background: var(--card-bg); 
+            border: 1px solid var(--border); 
+            border-radius: 16px; 
+            padding: 2.2rem; 
+            display: flex; 
+            flex-direction: column; 
+            justify-content: space-between; 
+            transition: all 0.3s ease; 
+        }
+        .unit-card:hover { 
+            background: var(--card-hover); 
+            border-color: var(--accent-cyan); 
+            transform: translateY(-5px); 
+        }
+
+        .unit-card h2 { font-size: 1.6rem; margin-bottom: 0.5rem; color: #fff; }
+        .unit-card .tag { font-size: 0.8rem; font-weight: 700; color: var(--accent-cyan); text-transform: uppercase; margin-bottom: 1rem; display: block; }
+        .unit-card p { color: var(--text-muted); margin-bottom: 1.5rem; font-size: 0.95rem; }
+
+        .unit-btn { 
+            display: inline-flex; 
+            align-items: center; 
+            justify-content: center; 
+            gap: 0.5rem; 
+            background: var(--accent-blue); 
+            color: #fff; 
+            text-decoration: none; 
+            font-weight: 700; 
+            padding: 0.8rem 1.5rem; 
+            border-radius: 8px; 
+            transition: background 0.2s; 
+        }
+        .unit-btn:hover { background: var(--accent-cyan); color: #000; }
+
+        footer { border-top: 1px solid var(--border); padding: 2rem; text-align: center; color: var(--text-muted); font-size: 0.9rem; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="nav-container">
+            <a href="#" class="brand-logo">Directo<span>Media</span></a>
+            <button class="menu-btn" onclick="toggleMenu()">☰</button>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#unidades">Unidades de Negocio</a></li>
+                <li><a href="https://clipedia.com">Clipedia (Vídeo)</a></li>
+                <li><a href="https://tudirecto.com">TuDirecto (Streaming)</a></li>
+                <li><a href="https://tuagente.ai">TuAgente (IA)</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="hero-badge">Ecosistema Tecnológico & Audiovisual</div>
+        <h1>Soluciones Integrales de <span>Streaming, IA y Vídeo</span></h1>
+        <p>Unificamos la innovación en Inteligencia Artificial, retransmisiones en vivo de alta gama y producción audiovisual masiva bajo un mismo grupo especializado.</p>
+    </section>
+
+    <section class="hub-section" id="unidades">
+        <div class="hub-grid">
+            
+            <!-- Unidad 1: Clipedia -->
+            <div class="unit-card">
+                <div>
+                    <span class="tag">Contenido & IA Generativa</span>
+                    <h2>Clipedia</h2>
+                    <p>Especialistas en clips de alto impacto, edición en formato corto para redes sociales, motion graphics y producción de vídeo generativo sintético.</p>
+                </div>
+                <a href="https://clipedia.com" class="unit-btn">Ir a Clipedia &rarr;</a>
+            </div>
+
+            <!-- Unidad 2: TuDirecto -->
+            <div class="unit-card">
+                <div>
+                    <span class="tag">Streaming & Virtual eTickets</span>
+                    <h2>TuDirecto</h2>
+                    <p>Producción y realización multicámara en directo para eventos corporativos, pasarelas de ticketing e-ticket y emisión privada en vivo.</p>
+                </div>
+                <a href="https://tudirecto.com" class="unit-btn">Ir a TuDirecto &rarr;</a>
+            </div>
+
+            <!-- Unidad 3: TuAgente.ai -->
+            <div class="unit-card">
+                <div>
+                    <span class="tag">Automatización & Agentes IA</span>
+                    <h2>TuAgente.ai</h2>
+                    <p>Desarrollo de asistentes virtuales 24/7, agentes de agendamiento automático de citas e integración conversacional con CRM.</p>
+                </div>
+                <a href="https://tuagente.ai" class="unit-btn">Ir a TuAgente.ai &rarr;</a>
+            </div>
+
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 DirectoMedia Group. Todos los derechos reservados.</p>
+    </footer>
+
+    <script>
+        function toggleMenu() {
+            document.getElementById('navLinks').classList.toggle('active');
+        }
+    </script>
+</body>
+</html>
